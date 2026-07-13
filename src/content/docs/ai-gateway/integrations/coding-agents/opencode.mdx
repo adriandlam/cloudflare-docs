@@ -1,0 +1,66 @@
+---
+title: OpenCode
+description: Route OpenCode through AI Gateway using its built-in Cloudflare AI Gateway provider.
+pcx_content_type: configuration
+sidebar:
+  order: 5
+products:
+  - ai-gateway
+---
+
+import { Tabs, TabItem, Steps } from "~/components";
+
+[OpenCode](https://opencode.ai/docs/) is a coding agent you run in your terminal. It includes a `cloudflare-ai-gateway` provider that routes requests through AI Gateway. AI Gateway authenticates the model provider for you through [Unified Billing](/ai-gateway/features/unified-billing/), so you pass a Cloudflare API token instead of a model provider API key.
+
+## Prerequisites
+
+Before you start, you need:
+
+- Your Cloudflare account ID. To find it, refer to [Find your account and zone IDs](/fundamentals/account/find-account-and-zone-ids/).
+- An AI Gateway. You can use your account's `default` gateway or [create a gateway](/ai-gateway/get-started/) and use its slug.
+- A [Cloudflare API token](/fundamentals/api/get-started/create-token/) with `AI Gateway` permission.
+- [Credits loaded](/ai-gateway/features/unified-billing/#load-credits) on your account for third-party models.
+- [OpenCode](https://opencode.ai/docs/) installed and updated to the latest version.
+
+<Steps>
+
+1. Set your account ID, gateway slug, and Cloudflare API token as environment variables. OpenCode reads these variables on startup. The following commands set them for the current session. To persist them, add them to your shell profile (for example, `~/.zshrc` or `~/.bashrc`).
+
+   Replace `<CLOUDFLARE_ACCOUNT_ID>` and `<CLOUDFLARE_API_TOKEN>` with your values. You can leave `CLOUDFLARE_GATEWAY_ID` as `default` to route through your account's default gateway, or change it to another gateway slug.
+
+   <Tabs syncKey="os">
+   <TabItem label="macOS / Linux">
+
+   ```bash
+   # Run `wrangler whoami` to get your account ID.
+   export CLOUDFLARE_ACCOUNT_ID="<CLOUDFLARE_ACCOUNT_ID>"
+   # Use `default` to route through your account's default gateway.
+   export CLOUDFLARE_GATEWAY_ID="default"
+   # Run `wrangler auth token` to get an API token.
+   export CLOUDFLARE_API_TOKEN="<CLOUDFLARE_API_TOKEN>"
+   ```
+
+   </TabItem>
+   <TabItem label="Windows (PowerShell)">
+
+   ```powershell
+   # Run `wrangler whoami` to get your account ID.
+   $env:CLOUDFLARE_ACCOUNT_ID = "<CLOUDFLARE_ACCOUNT_ID>"
+   # Use `default` to route through your account's default gateway.
+   $env:CLOUDFLARE_GATEWAY_ID = "default"
+   # Run `wrangler auth token` to get an API token.
+   $env:CLOUDFLARE_API_TOKEN = "<CLOUDFLARE_API_TOKEN>"
+   ```
+
+   </TabItem>
+   </Tabs>
+
+2. Start a session against a model. Model names use the `cloudflare-ai-gateway/<PROVIDER>/<MODEL>` format. Requests now route through AI Gateway.
+
+   ```bash
+   opencode --model "cloudflare-ai-gateway/openai/gpt-5.5"
+   ```
+
+</Steps>
+
+To confirm traffic reaches AI Gateway, refer to [Verify it works](/ai-gateway/integrations/coding-agents/#verify-it-works).
