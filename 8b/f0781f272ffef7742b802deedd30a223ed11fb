@@ -1,0 +1,29 @@
+bin/fetch-catalog-models.ts
+  s_ae74a883b22918::t_b16def90f38315 66,74,100-101,104-225,231,366,370-381,383-404,406-412,416,441-444,454-455,457,467,583,618-640
+.github/workflows/sync-ai-model-catalog.yml
+  s_56ff622d9ff14b::t_d8baa0f6c1f782 1-146
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "8bf0781f272ffef7742b802deedd30a223ed11fb",
+  "prompts": {},
+  "sessions": {
+    "s_56ff622d9ff14b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f667a-3826-7dd1-b500-6406010bbacb",
+        "model": "unknown"
+      },
+      "human_author": "Adrian Lam <me@adrianlam.sh>"
+    },
+    "s_ae74a883b22918": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5c7e-30e7-7e82-bc14-8d79fd207d4e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Adrian Lam <me@adrianlam.sh>"
+    }
+  }
+}
